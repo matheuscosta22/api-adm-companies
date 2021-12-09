@@ -1,6 +1,4 @@
 var User = require("../models/User")
-var knex = require("../database/connection")
-var secret = require("../jwt/secret")
 
 class UserController {
 
@@ -40,19 +38,24 @@ class UserController {
                 return
             }
 
-            if (id_company !== null) {
-                if (id_company == undefined || id_company == "" || id_company.length < 1 || typeof (id_company) !== "number") {
+            if (id_company !== undefined) {
+                if (id_company == "" || id_company.length < 1 || typeof (id_company) !== "number") {
                     res.status(422)
                     res.json({ err: "invalid id_company" })
                     return
                 }
+            } else {
+                id_company = null
             }
-            if (id_place !== null) {
-                if (id_place == undefined || id_place == "" || id_place.length < 1 || typeof (id_place) !== "number") {
+
+            if (id_place !== undefined) {
+                if (id_place == "" || id_place.length < 1 || typeof (id_place) !== "number") {
                     res.status(422)
                     res.json({ err: "invalid id_place" })
                     return
                 }
+            } else {
+                id_place = null
             }
 
             var emailExists = await User.testEmail(email)

@@ -1,0 +1,63 @@
+user
+
+CREATE TABLE users (
+id SERIAL NOT NULL,
+name VARCHAR (256) NOT NULL,
+email VARCHAR (191) NOT NULL,
+zipcode VARCHAR (256) NOT NULL,
+number VARCHAR (256) NOT NULL,
+password VARCHAR (191) NOT NULL,
+street VARCHAR (256) NOT NULL,
+neighborhood VARCHAR (256) NOT NULL,
+city VARCHAR (256) NOT NULL,
+state VARCHAR (256) NOT NULL,
+id_company int NULL,
+id_place int NULL,
+CONSTRAINT PK_users PRIMARY KEY (id),
+CONSTRAINT FK_id_company FOREIGN KEY (id_company) REFERENCES companies (id),
+CONSTRAINT FK_id_place FOREIGN KEY (id_place) REFERENCES places (id)
+);
+INSERT INTO users (name, email, zipcode, number, password, street, neighborhood, city, state) values ('name', 'email@gmail.com','60425565', '2539', '$2b$10$S8fK2nTwbZ1eknEPaNL56eEfspyL3x8GfYdhf9azzDLh.jqTHUUKy','street', 'neighborhood', 'city', 'state');
+para logar com este user use o email: email@gmail.com e a password: 'asdfasdf'
+
+
+
+companies
+
+CREATE TABLE companies (
+id SERIAL NOT NULL,
+name VARCHAR (256) NOT NULL,
+cnpj VARCHAR (50) NOT NULL,
+description varchar (256) NOT NULL,
+zipcode VARCHAR (256) NOT NULL,
+number VARCHAR (256) NOT NULL,
+street VARCHAR (256) NOT NULL,
+neighborhood VARCHAR (256) NOT NULL,
+city VARCHAR (256) NOT NULL,
+state VARCHAR (256) NOT NULL,
+id_user_manager int NOT NULL,
+CONSTRAINT PK_companies PRIMARY KEY (id),
+CONSTRAINT FK_id_user_manager FOREIGN KEY (id_user_manager) REFERENCES users (id)
+);
+INSERT INTO companies (name, cnpj, description, zipcode, number, street, neighborhood, city, state, id_user_manager) values ('fantasy name', '00.000.000/0001-70', 'any description', 67367217, 2626, 'street', 'neighborhood', 'city', 'state', 1);
+
+
+
+locais
+
+CREATE TABLE places (
+id SERIAL NOT NULL,
+name VARCHAR (256) NOT NULL,
+zipcode VARCHAR (256) NOT NULL,
+number VARCHAR (256) NOT NULL,
+street VARCHAR (256) NOT NULL,
+neighborhood VARCHAR (256) NOT NULL,
+city VARCHAR (256) NOT NULL,
+state VARCHAR (256) NOT NULL,
+id_company int NOT NULL,
+id_user_manager int NOT NULL,
+CONSTRAINT PK_places PRIMARY KEY (id),
+CONSTRAINT FK_id_company FOREIGN KEY (id_company) REFERENCES companies (id),
+CONSTRAINT FK_id_user_manager FOREIGN KEY (id_user_manager) REFERENCES users (id)
+);
+INSERT INTO places (name, zipcode, number, street, neighborhood, city, state, id_company, id_user_manager) values ('name', '60425565', '2539', 'street', 'neighborhood', 'city', 'state', 1, 1);

@@ -7,6 +7,5 @@ var knex = require('knex')({
     password: '',
     database: ''
   }
-});
-
+})
 module.exports = knex

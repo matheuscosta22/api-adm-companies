@@ -1,7 +1,4 @@
 var Place = require("../models/Place")
-var bcrypt = require("bcrypt")
-var jwt = require("jsonwebtoken")
-var secret = require("../jwt/secret")
 
 class PlaceController {
 

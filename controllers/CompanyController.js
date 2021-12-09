@@ -1,8 +1,4 @@
 var Company = require("../models/Company")
-var knex = require("../database/connection")
-var bcrypt = require("bcrypt")
-var jwt = require("jsonwebtoken")
-var secret = require("../jwt/secret")
 
 class CompanyController {
 
