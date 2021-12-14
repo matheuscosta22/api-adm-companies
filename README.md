@@ -13,7 +13,7 @@ subistitua 'uri' pelo modelo que quer gerenciar (user, company, place), é neces
 
 POST "http://localhost:8686/api/login"
 
-GET "http://localhost:8686/api/check-token" BEARER token para checar token dos usuários
+GET "http://localhost:8686/api/check-token" envie um BEARER token para checar se é válido
 
 GET "http://localhost:8686/api/'uri'" BEARER token
 
