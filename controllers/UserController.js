@@ -26,7 +26,7 @@ class UserController {
                 return
             }
 
-            if (zipcode == undefined || zipcode == "" || zipcode.length < 8) {
+            if (zipcode == undefined || zipcode == "" || zipcode.length < 7) {
                 res.status(422)
                 res.json( "invalid zipcode" )
                 console.log("invalid zipcode")

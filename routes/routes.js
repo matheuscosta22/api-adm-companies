@@ -7,7 +7,7 @@ var UserAuth = require("../middleware/UserAuth")
 var PlaceController = require("../controllers/PlaceController")
 
 
-router.post("/user", UserAuth,UserController.create)
+router.post("/user", UserController.create)
 router.get("/user", UserAuth, UserController.all)
 router.get("/user/:id", UserAuth, UserController.findById)
 router.put("/user/:id", UserAuth, UserController.update)
