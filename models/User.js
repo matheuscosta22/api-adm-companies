@@ -145,8 +145,8 @@ class User {
         if (user.length > 0) {
             var result = await bcrypt.compare(password, user[0].password)
             if (result) {
-                var token = jwt.sign({ email: user[0].email }, secret)
-                return { status: true, token: token }
+                var token = jwt.sign({ name: user[0].name, id: user[0].id }, secret)
+                return { token: token, id: user[0].id, name: user[0].name, status: true }
             } else {
                 return { status: false, err: "invalid credentials" }
             }

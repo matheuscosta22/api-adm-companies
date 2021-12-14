@@ -1,4 +1,8 @@
 var User = require("../models/User")
+const secret = require("../jwt/secret")
+var jwt = require("jsonwebtoken")
+const res = require("express/lib/response")
+const { compareSync } = require("bcrypt")
 
 class UserController {
 
@@ -6,42 +10,48 @@ class UserController {
     async create(req, res) {
         try {
             var { name, email, zipcode, number, password, id_company, id_place } = req.body
-
+            
             //validation
             if (name == undefined || name == "" || name.length < 5 || typeof (name) !== "string") {
                 res.status(422)
-                res.json({ err: "invalid name" })
+                res.json( "invalid name" )
+                console.log("invalid name")
                 return
             }
 
             if (email == undefined || email == "" || email.length < 7 || typeof (email) !== "string") {
                 res.status(422)
-                res.json({ err: "invalid email" })
+                res.json( "invalid email" )
+                console.log("invalid email")
                 return
             }
 
-            if (zipcode == undefined || zipcode == "" || zipcode.length < 8 || typeof (zipcode) !== "number") {
+            if (zipcode == undefined || zipcode == "" || zipcode.length < 8) {
                 res.status(422)
-                res.json({ err: "invalid zipcode" })
+                res.json( "invalid zipcode" )
+                console.log("invalid zipcode")
                 return
             }
 
-            if (number == undefined || number == "" || number.length < 1 || typeof (number) !== "number") {
+            if (number == undefined || number == "" || number.length < 1) {
                 res.status(422)
-                res.json({ err: "invalid number" })
+                res.json( "invalid number" )
+                console.log("invalid number")
                 return
             }
 
             if (password == undefined || password == "" || password.length < 8 || typeof (password) !== "string") {
                 res.status(422)
-                res.json({ err: "invalid password" })
+                res.json( "invalid passwod" )
+                console.log("invalid password")
                 return
             }
 
             if (id_company !== undefined) {
                 if (id_company == "" || id_company.length < 1 || typeof (id_company) !== "number") {
                     res.status(422)
-                    res.json({ err: "invalid id_company" })
+                    res.json( "invalid id_comany" )
+                    console.log("invalid id_company")
                     return
                 }
             } else {
@@ -51,7 +61,8 @@ class UserController {
             if (id_place !== undefined) {
                 if (id_place == "" || id_place.length < 1 || typeof (id_place) !== "number") {
                     res.status(422)
-                    res.json({ err: "invalid id_place" })
+                    res.json( "invalid id_plae" )
+                    console.log("invalid id_place")
                     return
                 }
             } else {
@@ -63,6 +74,7 @@ class UserController {
             if (emailExists) {
                 res.status(422)
                 res.json({ err: "email already registered" })
+                console.log("email already registered")
                 return
             }
 
@@ -220,6 +232,28 @@ class UserController {
         }
         return
 
+    }
+
+    async checkToken(req, res) {
+        const authToken = req.headers['authorization']
+
+    if (authToken !== undefined) {
+        const bearer = authToken.split(' ')
+        var token = bearer[1]
+        try {
+            jwt.verify(token, secret)
+
+            res.status(200)
+            res.send({status: "authorized", name: jwt.verify(token, secret).name, id: jwt.verify(token, secret).id})
+
+        } catch (err) {
+            res.status(401)
+            res.send({status: "user must be logged"})
+        }
+    } else {
+        res.status(401)
+        res.send({status: "user must be logged"})
+    }
     }
 
 }

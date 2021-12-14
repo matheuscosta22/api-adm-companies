@@ -13,12 +13,14 @@ subistitua 'uri' pelo modelo que quer gerenciar (user, company, place), é neces
 
 POST "http://localhost:8686/api/login"
 
-GET "http://localhost:8686/api/'uri'"
+GET "http://localhost:8686/api/check-token" BEARER token para checar token dos usuários
 
-POST "http://localhost:8686/api/'uri'"
+GET "http://localhost:8686/api/'uri'" BEARER token
 
-SELECT "http://localhost:8686/api/'uri'/{id}"
+POST "http://localhost:8686/api/'uri'" BEARER token
 
-PUT "http://localhost:8686/api/'uri'/{id}"
+SELECT "http://localhost:8686/api/'uri'/{id}" BEARER token
 
-DELETE "http://localhost:8686/api/'uri'/{id}"
+PUT "http://localhost:8686/api/'uri'/{id}" BEARER token
+
+DELETE "http://localhost:8686/api/'uri'/{id}" BEARER token

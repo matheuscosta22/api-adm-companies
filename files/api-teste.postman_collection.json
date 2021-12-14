@@ -208,6 +208,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "checkToken",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdGFuZG8iLCJpZCI6MywiaWF0IjoxNjM5NDQ1OTQ1fQ.C7RvChKWcLO1qWd6Z3lT8O3Roj5gueRAHO1l5ceA0j4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8686/api/check-token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8686",
+							"path": [
+								"api",
+								"check-token"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

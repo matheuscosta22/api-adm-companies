@@ -3,9 +3,9 @@ var knex = require('knex')({
   connection: {
     host: '127.0.0.1',
     port: 5432,
-    user: '',
-    password: '',
-    database: ''
+    user: 'postgres',
+    password: 'asdfasdf',
+    database: 'api_teste'
   }
 })
 module.exports = knex
